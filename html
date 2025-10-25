@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iklan Promo SiBoy - Dimsum, Donat, Salad</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles and configuration for Tailwind */
+        :root {
+            --primary-color: #EF4444; /* Red-500 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        /* Style untuk container slide */
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 1.5rem; /* rounded-3xl */
+        }
+        /* Style untuk trek slide */
+        .slides-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            flex: 0 0 100%; /* Setiap slide mengambil 100% lebar container */
+            width: 100%;
+            height: 400px; /* Tinggi tetap untuk estetika */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Overlay untuk teks yang lebih jelas */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 100%);
+            z-index: 10;
+        }
+
+        .slide-content {
+            z-index: 20;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Backgrounds (using placeholder colors as we cannot load external images) */
+        .slide-dimsum { background-color: #3B82F6; } /* Blue/Dimsum */
+        .slide-donut { background-color: #FBBF24; } /* Amber/Donut */
+        .slide-salad { background-color: #10B981; } /* Emerald/Salad */
+
+        /* Placeholder Text for Visuals */
+        .visual-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            font-weight: 800;
+            opacity: 0.7;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 15;
+        }
+
+        /* Responsive height adjustments */
+        @media (min-width: 768px) {
+            .slide {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="promo-ad" class="w-full max-w-4xl bg-white shadow-2xl rounded-3xl overflow-hidden transform transition duration-500 hover:shadow-3xl">
+
+    <!-- Header / Branding -->
+    <header class="p-6 bg-red-600 text-white text-center rounded-t-3xl">
+        <h1 class="text-4xl font-extrabold tracking-tight">SIBOY <span class="text-yellow-300">PROMO</span></h1>
+        <p class="mt-2 text-xl font-medium">Lezat, Manis, Segar! Pilihan Terbaik SiBoy untukmu.</p>
+    </header>
+
+    <!-- Slider Area -->
+    <div class="relative">
+        <div class="slider-container">
+            <div id="slides-track" class="slides-track">
+
+                <!-- Slide 1: Dimsum -->
+                <div class="slide slide-dimsum">
+                    <div class="visual-text">DIMSUM</div>
+                    <div class="slide-content">
+                        <h2 class="text-5xl font-extrabold mb-3">DIMSUM MANTAP</h2>
+                        <p class="text-lg font-medium">Rasa otentik, dijamin bikin ketagihan. <br>Khusus minggu ini, beli 3 gratis 1!</p>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Donat -->
+                <div class="slide slide-donut">
+                    <div class="visual-text">DONAT</div>
+                    <div class="slide-content">
+                        <h2 class="text-5xl font-extrabold mb-3">DONAT EMPUK & MANIS</h2>
+                        <p class="text-lg font-medium">Beragam topping premium, bikin harimu ceria. <br>Diskon 20% untuk semua varian donat!</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Salad -->
+                <div class="slide slide-salad">
+                    <div class="visual-text">SALAD</div>
+                    <div class="slide-content">
+                        <h2 class="text-5xl font-extrabold mb-3">SALAD FRESH & SEHAT</h2>
+                        <p class="text-lg font-medium">Pilihan sayur dan dressing terbaik, untuk gaya hidup sehat. <br>Gratis *delivery* untuk pemesanan salad min. 2 porsi.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Tombol Navigasi (Prev/Next) -->
+        <button id="prev-btn" aria-label="Slide Sebelumnya" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/50 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition duration-300 z-30">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button id="next-btn" aria-label="Slide Berikutnya" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/50 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition duration-300 z-30">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+
+        <!-- Indikator Slide (Dots) -->
+        <div id="indicators" class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-30">
+            <!-- Dots will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Call to Action (CTA) -->
+    <div class="p-6 bg-gray-50 flex flex-col items-center gap-4 rounded-b-3xl">
+        <p class="text-lg font-semibold text-gray-700">Jangan lewatkan kesempatan promo terbatas ini!</p>
+        <a href="#" class="inline-block px-8 py-3 text-xl font-bold text-white bg-red-600 rounded-full shadow-xl transition transform hover:scale-105 hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300">
+            PESAN SEKARANG!
+        </a>
+    </div>
+
+</div>
+
+<script>
+    const track = document.getElementById('slides-track');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const indicatorsContainer = document.getElementById('indicators');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoPlayInterval;
+
+    /**
+     * Menampilkan slide berdasarkan index
+     * @param {number} index - Index slide yang akan ditampilkan
+     */
+    function showSlide(index) {
+        // Atur index agar selalu berada dalam batas 0 hingga totalSlides - 1
+        if (index >= totalSlides) {
+            currentIndex = 0;
+        } else if (index < 0) {
+            currentIndex = totalSlides - 1;
+        } else {
+            currentIndex = index;
+        }
+
+        // Lakukan translasi horizontal
+        const offset = -currentIndex * 100;
+        track.style.transform = `translateX(${offset}%)`;
+
+        updateIndicators();
+    }
+
+    /**
+     * Pindah ke slide berikutnya
+     */
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+
+    /**
+     * Pindah ke slide sebelumnya
+     */
+    function prevSlide() {
+        showSlide(currentIndex - 1);
+    }
+
+    /**
+     * Membuat dan memperbarui indikator (dots)
+     */
+    function updateIndicators() {
+        indicatorsContainer.innerHTML = '';
+        slides.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.classList.add('w-3', 'h-3', 'rounded-full', 'mx-1', 'transition-all', 'duration-300');
+            
+            if (index === currentIndex) {
+                // Dot aktif (merah terang)
+                dot.classList.add('bg-red-600', 'w-4', 'h-4'); 
+            } else {
+                // Dot tidak aktif (putih transparan)
+                dot.classList.add('bg-white/70', 'hover:bg-white');
+            }
+
+            dot.setAttribute('aria-label', `Pindah ke slide ${index + 1}`);
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                restartAutoPlay();
+            });
+            indicatorsContainer.appendChild(dot);
+        });
+    }
+
+    /**
+     * Memulai otomatisasi slide (autoplay)
+     */
+    function startAutoPlay() {
+        // Ganti slide setiap 5 detik (5000ms)
+        autoPlayInterval = setInterval(nextSlide, 5000); 
+    }
+
+    /**
+     * Menghentikan dan memulai ulang otomatisasi slide
+     */
+    function restartAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+    }
+
+    put // Event Listeners
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        restartAutoPlay();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        restartAutoPlay();
+    });
+
+    // Inisialisasi pada saat dokumen dimuat
+    window.onload = function () {
+        showSlide(0); // Tampilkan slide pertama
+        startAutoPlay(); // Mulai autoplay
+    }
+
+    // Opsi: Hentikan autoplay saat mouse berada di atas ad
+    const promoAd = document.getElementById('promo-ad');
+    promoAd.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    promoAd.addEventListener('mouseleave', restartAutoPlay);
+
+
+</script>
+</body>
+</html>
